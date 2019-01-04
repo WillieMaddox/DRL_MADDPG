@@ -1,8 +1,7 @@
 This project is a copy of the Udacity deep reinforcement learning practice lab, MADDPG.  The lab originally runs on their online workspace environment, but I wanted to be able to run it locally.  This repo contains the steps to do so.
 Also note that the folder `baselines` is a hard copy of:
-```
+
 [OpenAI baselines](https://github.com/openai/baselines.git), commit hash: 98257ef8c9bd23a24a330731ae54ed086d9ce4a7
-```
 
 # Instructions
 First clone this repo, cd into it, and create a fresh virtual environment:
