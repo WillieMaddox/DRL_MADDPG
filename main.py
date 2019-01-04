@@ -1,13 +1,14 @@
 # main function that sets up environments
 # perform training loop
 
+import os
+import progressbar as pb
+import numpy as np
+import torch
+from tensorboardX import SummaryWriter
 import envs
 from buffer import ReplayBuffer
 from maddpg import MADDPG
-import torch
-import numpy as np
-from tensorboardX import SummaryWriter
-import os
 from utilities import transpose_list, transpose_to_tensor
 
 # for saving gif
@@ -43,7 +44,7 @@ def main():
     # how many episodes to save policy and gif
     save_interval = 1000
     t = 0
-    
+
     # amplitude of OU noise
     # this slowly decreases to 0
     noise = 2
@@ -53,13 +54,13 @@ def main():
     episode_per_update = 2 * parallel_envs
 
     log_path = os.getcwd() + "/log"
-    model_dir= os.getcwd() + "/model_dir"
+    model_dir = os.getcwd() + "/model_dir"
     
     os.makedirs(model_dir, exist_ok=True)
 
     torch.set_num_threads(parallel_envs)
     env = envs.make_parallel_env(parallel_envs)
-    
+
     # keep 5000 episodes worth of replay
     buffer = ReplayBuffer(int(5000 * episode_length))
     
@@ -72,7 +73,6 @@ def main():
 
     # training loop
     # show progressbar
-    import progressbar as pb
     widget = ['episode: ', pb.Counter(), '/', str(number_of_episodes), ' ',
               pb.Percentage(), ' ', pb.ETA(), ' ', pb.Bar(marker=pb.RotatingMarker()), ' ']
     
@@ -111,7 +111,7 @@ def main():
             # transpose the list of list
             # flip the first two indices
             # input to step requires the first index to correspond to number of parallel agents
-            actions_for_env = np.rollaxis(actions_array,1)
+            actions_for_env = np.rollaxis(actions_array, 1)
             
             # step forward one frame
             next_obs, next_obs_full, rewards, dones, info = env.step(actions_for_env)

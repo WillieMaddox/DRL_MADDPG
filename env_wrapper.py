@@ -33,8 +33,7 @@ def worker(remote, parent_remote, env_fn_wrapper):
             remote.send((env.observation_space, env.action_space))
         elif cmd == 'get_agent_types':
             if all([hasattr(a, 'adversary') for a in env.agents]):
-                remote.send(['adversary' if a.adversary else 'agent' for a in
-                             env.agents])
+                remote.send(['adversary' if a.adversary else 'agent' for a in env.agents])
             else:
                 remote.send(['agent' for _ in env.agents])
         else:
