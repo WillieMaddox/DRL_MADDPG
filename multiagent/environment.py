@@ -122,6 +122,10 @@ class MultiAgentEnv(gym.Env):
 
         return obs_n, obs_full
 
+    def seed(self, seed=None):
+        np.random.seed(seed)
+        return [seed]
+
     # get info used for benchmarking
     def _get_info(self, agent):
         if self.info_callback is None:
