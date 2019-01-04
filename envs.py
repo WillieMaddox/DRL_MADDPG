@@ -3,6 +3,7 @@ import numpy as np
 import multiagent.scenarios as scenarios
 from multiagent.environment import MultiAgentEnv
 
+
 def make_parallel_env(n_rollout_threads, seed=1):
     def get_env_fn(rank):
         def init_env():
@@ -17,7 +18,7 @@ def make_parallel_env(n_rollout_threads, seed=1):
     return SubprocVecEnv([get_env_fn(i) for i in range(n_rollout_threads)])
 
 
-def make_env(scenario_name,benchmark=False):
+def make_env(scenario_name, benchmark=False):
 
     scenario = scenarios.load(scenario_name + ".py").Scenario()
     world = scenario.make_world()
