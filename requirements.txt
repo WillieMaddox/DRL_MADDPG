@@ -1,7 +1,7 @@
 glfw==1.7.0
 gym==0.9.6
 imageio==2.1.2
-ipython==6.5.0
+ipython==7.16.3
 numpy==1.12.1
 Pillow==4.2.1
 progressbar==2.5
